@@ -1,8 +1,9 @@
 import os
 from dataclasses import fields
 
-import psycopg2
+from psycopg2.pool import SimpleConnectionPool
 from dotenv import load_dotenv
+from icecream import ic
 
 from dataclass_models import (
     Filmwork,
@@ -36,22 +37,25 @@ dsn = {
 
 
 def save_to_postgres():
-    data_models = {
+    models = {
         'film_work': Filmwork,
         'genre': Genre,
         'person': Person,
         'genre_film_work': GenreFilmwork,
         'person_film_work': PersonFilmwork,
     }
-    with psycopg2.connect(**dsn) as conn, conn.cursor() as cursor:
-        for table_name, model in data_models.items():
-            data = sqlite_extractor(table_name)
-            instance = model(**dict(data[0]))
-            column_names = [field.name for field in fields(instance)]
-            column_names_str = ', '.join(column_names)
-            placeholders = ', '.join(['%s'] * len(column_names))
-            args = ','.join(cursor.mogrify(f'({placeholders})', row).decode() for row in data)
-            cursor.execute(
-                f'INSERT INTO {table_name} ({column_names_str}) VALUES {args};'
-                f'ON CONFLICT (id) DO NOTHING;'
-            )
+    pool = SimpleConnectionPool(**dsn)
+    with pool.getconn() as conn, conn.cursor() as cursor:
+        for table_name, model in models.items():
+            try:
+                data = sqlite_extractor(table_name)
+                instances = (model(**dict(row)) for row in data)
+                for instance in instances:
+                    column_names = [field.name for field in fields(instance)]
+                    placeholders = ', '.join(['%s'] * len(column_names))
+                    args = [cursor.mogrify(f'({placeholders})', row).decode() for row in data]
+                    query = f'''INSERT INTO {table_name} ({', '.join(column_names)})
+                                VALUES %s ON CONFLICT (id) DO NOTHING;'''
+                    cursor.execute(query, args)
+            except Exception as e:
+                ic(f'Ошибка при записи в таблицу {table_name}: {e}')
