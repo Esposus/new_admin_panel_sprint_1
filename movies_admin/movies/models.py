@@ -45,15 +45,19 @@ class Person(models.Model):
         return self.full_name
 
 
+class FilmworkTypes(models.TextChoices):
+    movie = 'Фильм'
+    tv_show = 'ТВ-шоу'
+
+
 class Filmwork(UUIDMixin, TimeStampedMixin):
-    TYPES = [('movie', 'Фильм'), ('tv_show', 'ТВ-шоу')]
     title = models.CharField(_('title'), max_length=255)
     description = models.TextField(_('description'), blank=True)
     creation_date = models.DateField(_('creation_date'), blank=True, null=True)
     rating = models.FloatField(_('rating'), blank=True,
                                validators=[MinValueValidator(0),
                                            MaxValueValidator(100)])
-    type = models.CharField(_('type'), max_length=255, choices=TYPES, blank=False)
+    type = models.CharField(_('type'), max_length=255, choices=FilmworkTypes.choices, blank=False)
     genres = models.ManyToManyField(Genre, through='GenreFilmwork')
     persons = models.ManyToManyField(Person, through='PersonFilmwork')
 
