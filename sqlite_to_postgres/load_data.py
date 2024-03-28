@@ -1,10 +1,9 @@
 import sqlite3
 
 import psycopg2
+from postgres_saver import save_to_postgres
 from psycopg2.extensions import connection as _connection
 from psycopg2.extras import DictCursor
-
-from postgres_saver import save_to_postgres
 
 
 def load_from_sqlite(connection: sqlite3.Connection, pg_conn: _connection):

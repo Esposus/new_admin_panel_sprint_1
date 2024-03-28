@@ -1,19 +1,12 @@
 import os
 from dataclasses import fields
 
-from psycopg2.pool import SimpleConnectionPool
+from dataclass_models import (Filmwork, Genre, GenreFilmwork, Person,
+                              PersonFilmwork)
 from dotenv import load_dotenv
 from icecream import ic
-
-from dataclass_models import (
-    Filmwork,
-    Genre,
-    Person,
-    GenreFilmwork,
-    PersonFilmwork,
-)
+from psycopg2.pool import SimpleConnectionPool
 from sqlite_saver import sqlite_extractor
-
 
 load_dotenv()
 
