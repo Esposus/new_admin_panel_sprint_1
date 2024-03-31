@@ -8,12 +8,6 @@ from psycopg2.extras import DictCursor
 
 def load_from_sqlite(connection: sqlite3.Connection, pg_conn: _connection):
     save_to_postgres()
-    """Основной метод загрузки данных из SQLite в Postgres"""
-    # postgres_saver = PostgresSaver(pg_conn)
-    # sqlite_extractor = SQLiteExtractor(connection)
-
-    # data = sqlite_extractor.extract_movies()
-    # postgres_saver.save_all_data(data)
 
 
 if __name__ == '__main__':
