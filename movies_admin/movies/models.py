@@ -1,6 +1,6 @@
 import uuid
 
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -28,7 +28,7 @@ class Genre(UUIDMixin, TimeStampedMixin):
         db_table = "content\".\"genre"
         verbose_name = 'Жанр'
         verbose_name_plural = 'Жанры'
-    
+
     def __str__(self):
         return self.name
 
@@ -40,7 +40,7 @@ class Person(models.Model):
         db_table = "content\".\"person"
         verbose_name = 'Персона'
         verbose_name_plural = 'Персоны'
-    
+
     def __str__(self):
         return self.full_name
 
@@ -57,7 +57,8 @@ class Filmwork(UUIDMixin, TimeStampedMixin):
     rating = models.FloatField(_('rating'), blank=True,
                                validators=[MinValueValidator(0),
                                            MaxValueValidator(100)])
-    type = models.CharField(_('type'), max_length=255, choices=FilmworkTypes.choices, blank=False)
+    type = models.CharField(
+        _('type'), max_length=255, choices=FilmworkTypes.choices, blank=False)
     genres = models.ManyToManyField(Genre, through='GenreFilmwork')
     persons = models.ManyToManyField(Person, through='PersonFilmwork')
 
@@ -93,5 +94,5 @@ class PersonFilmwork(UUIDMixin):
     class Meta:
         db_table = "content\".\"person_film_work"
         indexes = [
-            models.Index(fields=['film_work_id', 'person_id'], 
+            models.Index(fields=['film_work_id', 'person_id'],
                          name='film_work_person_idx')]
