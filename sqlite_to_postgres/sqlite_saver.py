@@ -12,11 +12,8 @@ def conn_context(db_path: str):
         conn.close()
 
 
-# db_path = 'db.sqlite'
-
-
 def sqlite_extractor(table_name):
     with conn_context('db.sqlite') as conn:
-        curs = conn.cursor()
-        curs.execute(f"SELECT * FROM {table_name};")
-        return curs.fetchall()
+        with conn.cursor() as curs:
+            curs.execute(f"SELECT * FROM {table_name};")
+            return curs.fetchmany(size=1000)

@@ -20,4 +20,3 @@ DSN = {
     'port': DB_PORT,
     'options': DB_OPTIONS,
 }
-

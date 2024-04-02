@@ -19,7 +19,7 @@ class Filmwork:
 @dataclass
 class Genre:
     id: UUID
-    name:str
+    name: str
     description: str
     created_at: datetime
     updated_at: datetime

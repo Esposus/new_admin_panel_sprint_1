@@ -1,0 +1,47 @@
+[33mcommit 601247f7a8cdfea78cf90d87058b85cd729ba899[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m)[m
+Author: Dmitry <adm713934@yandex.ru>
+Date:   Fri Mar 29 10:20:04 2024 +0300
+
+    added file db_settings.py
+
+[33mcommit a62d0661d2e0253c35930010a13c682b2159d81e[m
+Author: Dmitry <adm713934@yandex.ru>
+Date:   Thu Mar 28 10:40:57 2024 +0300
+
+    docker-compose added
+
+[33mcommit fc14967b1a593362b366406d6748371a16d8953e[m
+Author: Dmitry Morozov <adm713934>
+Date:   Wed Mar 27 19:48:27 2024 +0300
+
+    added TextChoices class
+
+[33mcommit 820c82427123dbc7899ec2bcbc00dbb52a0e82eb[m
+Author: Dmitry <adm713934@yandex.ru>
+Date:   Wed Mar 27 11:03:57 2024 +0300
+
+    refactored save_to_postgres method
+
+[33mcommit 3ba0c7679117432b01f380fdb24004dda4e5f9bf[m
+Author: Dmitry <adm713934@yandex.ru>
+Date:   Wed Mar 27 10:13:57 2024 +0300
+
+    добавлены методы переноса данных из sqlite в postgres. Нужен рефакторинг
+
+[33mcommit d86a9662624087d314101117223bc0348c6c4df9[m
+Author: Dmitry <adm713934@yandex.ru>
+Date:   Tue Mar 26 10:01:00 2024 +0300
+
+    добавлен код из теории тренажера
+
+[33mcommit 001bfd9b41c13e1a63be80032ee32dced3a61112[m
+Author: Dmitry Morozov <adm713934>
+Date:   Sun Mar 24 21:24:31 2024 +0300
+
+    [in process] 2/3 done
+
+[33mcommit 586dab882083e0863e0e38cefa43548b18ff466b[m[33m ([m[1;32mmain[m[33m)[m
+Author: Dmitry Morozov <ADM713934@yandex.ru>
+Date:   Mon Mar 18 07:57:32 2024 +0300
+
+    Initial commit
